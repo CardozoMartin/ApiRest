@@ -1,15 +1,11 @@
 import { Router, Request, Response } from "express";
-import { postProductos } from "../controllers/productosController";
+import { getProductos, postProductos } from "../controllers/productosController";
 
 
 const routerProductos = Router();
 
 
-routerProductos.get("/productos", (req: Request, res: Response) => {
-    res.json({
-        name: "Api Rest Task"
-    })
-})
+routerProductos.get("/productos", getProductos)
 
 routerProductos.post("/productos",postProductos)
 

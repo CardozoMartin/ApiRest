@@ -34,3 +34,25 @@ export const postProductos = async (req: Request, res: Response) => {
         });
     }
 };
+
+//Controlador para obtener los productos ya creados
+export const getProductos = async(req:Request,res:Response)=>{
+    try {
+        const data = await Producto.find({});
+
+        const dataProductos = data.map((item)=>({
+            id: item._id,
+            nombre: item.nombre,
+            precio: item.precio,
+            imagen: item.imagen,
+            descripcion: item.descripcion,
+            
+        }));
+        res.json({data: dataProductos, message:'Productos Encontrados'})
+    } catch (error) {
+        res.status(500).json({
+            data:null,
+            menssage:"ocurrio un error"
+        })
+    }
+}
