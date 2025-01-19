@@ -56,7 +56,7 @@ export const getProductos = async (req: Request, res: Response) => {
         })
     }
 }
-
+//Controlador para actualizar un producto
 export const putProductos = async (req: Request, res: Response) => {
 
     const {
@@ -64,25 +64,56 @@ export const putProductos = async (req: Request, res: Response) => {
         params: { id },
     } = req;
     try {
-        const actions = await Producto.updateOne({_id:id},body);
-    
-        if(actions.matchedCount === 0){
+        const actions = await Producto.updateOne({ _id: id }, body);
+
+        if (actions.matchedCount === 0) {
             res.status(400).json({
-                data:null,
-                message:"No se encontro el id"
+                data: null,
+                message: "No se encontro el id"
             });
             return;
         }
-    
+
         res.json({
-            data:null,
-            message:"Producto actualizado exitosamente"
+            data: null,
+            message: "Producto actualizado exitosamente"
         })
-        
+
     } catch (error) {
         res.status(500).json({
-            data:null,
-            message:"Ocurrio un error al actualzar un producto"
+            data: null,
+            message: "Ocurrio un error al actualzar un producto"
+        })
+    }
+}
+
+//Controlador para eliminar un procuto
+export const deleteProductos = async (req: Request, res: Response) => {
+    const {
+        body,
+        params: { id },
+    } = req;
+
+
+    try {
+        const actions = await Producto.findByIdAndDelete({ _id: id })
+        if (!actions) {
+            res.status(400).json({
+                data: null,
+                message: "No se encontro producto con ese id"
+            })
+            return;
+
+        }
+
+        res.json({
+            data: null,
+            message: "Producto eliminado"
+        })
+    } catch (error) {
+        res.status(500).json({
+            data: null,
+            message: "Ocurrio un error al eliminar el procuto"
         })
     }
 }
