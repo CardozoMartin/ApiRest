@@ -20,7 +20,7 @@ const UserSchema: Schema<IUsers> = new Schema({
     },
     isActive: {
         type: Boolean,
-        default: true
+        
     }
 })
 

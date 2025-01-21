@@ -6,7 +6,7 @@ const userService = new UserService();
 export class UserController {
     public async postUser(req: Request, res: Response) {
         try {
-            const newUser = await userService.createUser(req.body);
+            const newUser = await userService.createUser({...req.body, isActive:true});
             return res.status(201).json(newUser);
         } catch (error) {
             console.error("Error al crear usuario:", error);
