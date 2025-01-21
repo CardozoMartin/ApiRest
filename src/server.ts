@@ -2,6 +2,8 @@
 import express, { Express } from "express"; // Framework para manejar solicitudes HTTP.
 import morgan from "morgan"; // Middleware para registrar las solicitudes en la consola.
 import cors from "cors"; // Middleware para manejar CORS (intercambio de recursos entre diferentes dominios).
+import swaggerUi from "swagger-ui-express";
+import YAML from "yamljs";
 
 // Importamos las rutas que vamos a usar
 import { routerProductos } from "./routes/productosRoute";
@@ -26,6 +28,9 @@ export class Server {
     this.app.use(morgan("dev")); // Usamos morgan para registrar las solicitudes.
     this.app.use(cors()); // Usamos CORS para permitir solicitudes desde diferentes dominios.
     this.app.use(express.json()); // Usamos express.json para poder manejar cuerpos de solicitudes en formato JSON.
+
+    const swaggerDocument = YAML.load("./swagger.yaml");
+    this.app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
   }
 
   // Método privado para manejar las rutas.

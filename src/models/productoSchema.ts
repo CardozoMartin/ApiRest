@@ -22,6 +22,6 @@ const ProductoSchema: Schema<IProducto> = new Schema({
 
 });
 
-const Producto = mongoose.model<IProducto>("Prodcuto",ProductoSchema);
+const Producto = mongoose.model<IProducto>("Producto",ProductoSchema);
 
 export { Producto };
