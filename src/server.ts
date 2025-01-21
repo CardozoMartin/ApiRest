@@ -7,6 +7,7 @@ import YAML from "yamljs";
 
 // Importamos las rutas que vamos a usar
 import { routerProductos } from "./routes/productosRoute";
+import { routerUsers } from "./routes/userRoute";
 
 // Creamos una clase llamada Server que encapsula toda la lógica del servidor.
 export class Server {
@@ -37,6 +38,7 @@ export class Server {
   // En este caso, se configura el enrutador para productos.
   private routes() {
     this.app.use("/api", routerProductos); // Definimos que las rutas bajo "/api" usarán 'routerProductos'.
+    this.app.use("/api", routerUsers); // Definimos que las rutas bajo "/api" usarán 'routerUsers'.
   }
 
   // Método para iniciar el servidor y hacerlo escuchar en el puerto configurado.
