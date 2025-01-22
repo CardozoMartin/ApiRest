@@ -2,7 +2,9 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import { Request, Response } from 'express';
 import { User } from '../models/userSchema';
-
+import dotenv from 'dotenv';
+dotenv.config();
+const JWT = process.env.JWT_TOKEN as string;
 export class AuthController {
 
     public async login(req: Request, res: Response) {
@@ -25,7 +27,7 @@ export class AuthController {
                 apellido: userInDB.apellido
             }
 
-            const token = jwt.sign(userInfo, "123456789", { expiresIn: 60 * 60 * 24 });
+            const token = jwt.sign(userInfo, JWT, { expiresIn: 60 * 60 * 24 });
 
             return res.json({ data: token, message: "Usuario autenticado" });
         } catch (error) {
