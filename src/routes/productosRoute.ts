@@ -23,5 +23,5 @@ export class ProductoRoutes {
     }
 }
 
-// Exportamos la instancia de la clase para su uso en el servidor
+
 export const routerProductos = new ProductoRoutes().getRouter();
